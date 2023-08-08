@@ -54,7 +54,10 @@ public class Answer {
 
         Answer answer = (Answer) o;
 
-        return id != null ? id.equals(answer.id) : answer.id == null;
+        if (id != null ? !id.equals(answer.id) : answer.id != null) return false;
+        if (name != null ? !name.equals(answer.name) : answer.name != null) return false;
+        if (text != null ? !text.equals(answer.text) : answer.text != null) return false;
+        return number == answer.number;
     }
 
     @Override
