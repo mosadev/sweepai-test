@@ -29,14 +29,11 @@ public class AnswerController {
 
     @PutMapping("/{id}")
     public Answer updateAnswer(@PathVariable Long id, @RequestBody Answer answer) {
-        Answer existingAnswer = answerRepository.findById(id).orElse(null);
-        if (existingAnswer != null) {
-            existingAnswer.setName(answer.getName());
-            existingAnswer.setText(answer.getText());
-            existingAnswer.setNumber(answer.getNumber());
-            return answerRepository.save(existingAnswer);
-        }
-        return null;
+        Answer existingAnswer = answerRepository.findById(id).orElseThrow(() -> new RuntimeException("Answer not found"));
+        existingAnswer.setName(answer.getName());
+        existingAnswer.setText(answer.getText());
+        existingAnswer.setNumber(answer.getNumber());
+        return answerRepository.save(existingAnswer);
     }
 
     @DeleteMapping("/{id}")
